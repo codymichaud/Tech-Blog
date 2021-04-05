@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { json } = require('sequelize/types');
 const withAuth = require('../utils/auth');
 
 
@@ -7,12 +8,21 @@ router.get('/', async (req, res) => {
 });
 
 
-router.get('/dashboard', async (req, res) => {
-    const dashData = await new User({
-        where: { category: 'blog' }
-    });
+router.get('/dashboard', withAuth, async (req, res) => {
+    try {
+        const dashData = await new User({
+            where: { category: 'blog' }
+        });
+    } catch (error) {
+        res.status(500).json(error);
+    }
 });
 
 router.get('/login', async (req, res) => {
-    res.render('login');
+    try {
+        res.render('login');
+    } catch (error) {
+        res.status(500), json(error);
+    }
+
 });
