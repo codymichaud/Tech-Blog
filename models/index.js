@@ -1,12 +1,33 @@
-const User = require('./Users');
-const Dashboard = require('./Dashboards');
+const Users = require('./Users');
+const Comments = require('./Comments');
+const Posts = require('./Posts')
 
-User.hasMany(Dashboard, {
+Users.hasMany(Posts, {
+    foreignKey: 'user_id',
+});
+
+Posts.belongsTo(Users, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
 });
 
-Dashboard.belongsTo(User, {
+Comments.belongsTo(Users, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+});
+
+Comments.belongsTo(Posts, {
+    foreignKey: 'posts_id',
+    onDelete: 'CASCADE'
+});
+
+Users.hasMany(Comments, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+});
+
+
+Dashboard.belongsTo(Users, {
     foreignKey: 'user_id'
 });
 
