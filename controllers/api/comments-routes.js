@@ -12,8 +12,13 @@ router.get('/', async (req, res) => {
             },
             ],
         });
+
+
     } catch (error) {
         res.status(400).json(error);
     }
 });
 
+router.post('/', async (req, res) => {
+
+});
