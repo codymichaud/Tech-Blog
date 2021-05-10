@@ -56,10 +56,30 @@ router.get('/', (req, res) => {
             include: [{
                 model: Users,
                 as: 'users',
-                attributes: 'username',
-
-            }]
-        }
-        ]
+                attributes: ['username'],
+            },],
+        },
+        ],
     })
-})
+        .then((dbPostData) => {
+            if (!dbPostData) {
+                res.status(404).json({
+                    message: 'Sorry there are no posts available.'
+                });
+                return;
+            }
+            const posts = dbPostData.get({
+                plain: true
+            });
+            const userPosts = posts.user_id == req.session.user_id;
+            res.render('single-post', {
+                posts,
+                loggedIn: req.session.loggedIn,
+                currentUsers: userPosts,
+            });
+        })
+        .catch((error) => {
+            res.status(500).json(error);
+        });
+});
+
