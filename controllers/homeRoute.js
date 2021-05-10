@@ -89,3 +89,49 @@ router.get('/login', (req, res) => {
     });
 });
 
+router.get('/dashboard', (req, res) => {
+    Posts.findAll({
+        where: {
+            user_id: req.session.user_id,
+        },
+        attributes: ['id', 'title', 'body', 'user_id'],
+        include: [{
+            model: Users,
+            as: 'user',
+            attributes: ['username'],
+        },
+        {
+            model: Comments,
+            as: 'comments',
+            attributes: ['id', 'comment_text', 'user_id'],
+            include: [{
+                model: Users,
+                as: 'user',
+                attributes: ['username'],
+            },],
+        },
+        ],
+    })
+        .then((dbPostData) => {
+            if (!dbpostData) {
+                res.status(400).json({
+                    message: 'Sorry there are no posts available.'
+                });
+                return;
+            }
+            const post = dbPostData.map((posts) => posts.get({
+                plain: true
+            }));
+            res.render('dashboard', {
+                post,
+                loggedIn: req.session.loggedIn
+            });
+        })
+        .catch((error) => {
+            res.status(500).json(error);
+        });
+});
+
+router.get('/post', (req, res) => {
+
+})
