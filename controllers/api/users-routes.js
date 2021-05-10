@@ -68,6 +68,38 @@ router.post('/', (req, res) => {
                 req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
                 res.json(dbUserData);
+            });
+        })
+        .catch((error) => {
+            res.status(500).json(error);
+        });
+});
+
+router.post('/login', (req, res) => {
+    Users.findOne({
+        where: {
+            email: req.body.email,
+        },
+    })
+        .then((dbUserData) => {
+            if (!dbUserData) {
+                res.status(400).json({
+                    message: 'Sorry that user cannot be found in our database'
+                });
+                return;
+            }
+            const passwordIsValid = dbUserData.checkPassword(req.body.password);
+            if (!passwordIsValid) {
+                res.status(400).json({
+                    message: 'Sorry that password is incorrect.'
+                });
+                return;
+            }
+
+            req.session.save(() => {
+                req.session.user_id = dbUserData.id;
+                req.session.username = dbUserData.username;
+                req.session.loggedIn = true;
             })
         })
 })
