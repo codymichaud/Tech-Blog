@@ -38,7 +38,7 @@ router.get('/', (req, res) => {
         });
 });
 
-router.get('/', (req, res) => {
+router.get('/viewpost/:id', (req, res) => {
     Posts.findOne({
         where: {
             id: req.params.id,
@@ -81,5 +81,11 @@ router.get('/', (req, res) => {
         .catch((error) => {
             res.status(500).json(error);
         });
+});
+
+router.get('/login', (req, res) => {
+    res.render('login', {
+        loggedIn: req.session.loggedIn
+    });
 });
 
