@@ -138,3 +138,4 @@ router.get('/post', (req, res) => {
     });
 });
 
+module.exports = router;
