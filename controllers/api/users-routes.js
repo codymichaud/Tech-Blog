@@ -84,14 +84,14 @@ router.post('/login', (req, res) => {
         .then((dbUserData) => {
             if (!dbUserData) {
                 res.status(400).json({
-                    message: 'Sorry that user cannot be found in our database'
+                    message: 'Sorry that username is incorrect.'
                 });
                 return;
             }
             const passwordIsValid = dbUserData.checkPassword(req.body.password);
             if (!passwordIsValid) {
                 res.status(400).json({
-                    message: 'Sorry that password is incorrect.'
+                    message: 'Sorry that password  is incorrect.'
                 });
                 return;
             }
@@ -100,6 +100,26 @@ router.post('/login', (req, res) => {
                 req.session.user_id = dbUserData.id;
                 req.session.username = dbUserData.username;
                 req.session.loggedIn = true;
-            })
+
+                res.json({
+                    user: dbUserData,
+                    message: 'You have successfully logged in!!'
+                });
+            });
         })
-})
+        .catch((error) => {
+            res.status(500).json(error);
+        });
+});
+
+router.post('/logout', (req, res) => {
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        })
+    } else {
+        res.status(404).end();
+    }
+});
+
+module.exports = router;
