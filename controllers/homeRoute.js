@@ -28,7 +28,7 @@ router.get('/', (req, res) => {
             const post = dbPostData.map((posts) => posts.get({
                 plain: true
             }));
-            res.render('home', {
+            res.render('homepage', {
                 post,
                 loggedIn: req.session.loggedIn
             });
@@ -72,7 +72,7 @@ router.get('/viewpost/:id', (req, res) => {
                 plain: true
             });
             const userPosts = posts.user_id == req.session.user_id;
-            res.render('single-post', {
+            res.render('readPost', {
                 posts,
                 loggedIn: req.session.loggedIn,
                 currentUsers: userPosts,
@@ -133,7 +133,7 @@ router.get('/dashboard', (req, res) => {
 });
 
 router.get('/post', (req, res) => {
-    res.render('create-post', {
+    res.render('createPost', {
         loggedIn: req.session.loggedIn
     });
 });
