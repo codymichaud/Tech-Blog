@@ -6,7 +6,7 @@ router.get('/', (req, res) => {
         attributes: ['id', 'comment_body', 'user_id', 'post_id'],
         include: [{
             model: Users,
-            as: 'user',
+            as: 'users',
             attributes: ['username'],
         },
         ],
@@ -27,7 +27,7 @@ router.get('/:id', (req, res) => {
         attributes: ['id', 'comment_body', 'user_id', 'post_id'],
         include: [{
             model: Users,
-            as: 'user',
+            as: 'users',
             attributes: ['username'],
         },
         ],
