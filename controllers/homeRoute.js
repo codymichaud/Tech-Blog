@@ -7,8 +7,8 @@ router.get('/', (req, res) => {
     Posts.findAll({
         attributes: ['id', 'title', 'body', 'user_id'],
         include: [{
-            model: User,
-            as: 'user',
+            model: Users,
+            as: 'users',
             attributes: ['username'],
         },
         {
@@ -46,7 +46,7 @@ router.get('/viewpost/:id', (req, res) => {
         attributes: ['id', 'title', 'body', 'user_id'],
         include: [{
             model: Users,
-            as: 'user',
+            as: 'users',
             attributes: ['username']
         },
         {
@@ -97,7 +97,7 @@ router.get('/dashboard', (req, res) => {
         attributes: ['id', 'title', 'body', 'user_id'],
         include: [{
             model: Users,
-            as: 'user',
+            as: 'users',
             attributes: ['username'],
         },
         {
@@ -106,7 +106,7 @@ router.get('/dashboard', (req, res) => {
             attributes: ['id', 'comment_body', 'user_id'],
             include: [{
                 model: Users,
-                as: 'user',
+                as: 'users',
                 attributes: ['username'],
             },],
         },
