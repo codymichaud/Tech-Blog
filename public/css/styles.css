@@ -8,7 +8,7 @@
     list-style-type: none;
     padding: 1.25rem;
     margin: 0;
-    background-color: #231010;
+    background-color: #008B8B;
 }
 
 #navbar li {
@@ -19,15 +19,16 @@
 #navbar li p {
     padding-top: 0;
     padding-bottom: 3rem;
-    color: #d9ead3;
+    color: #FFFACD;
     display: inline;
     font-size: large;
 }
 
 #nav-header {
-    color: #d9ead3;
+    color: #FFFACD;
     font-size: xx-large;
     padding: 1.25rem;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* links */
@@ -39,7 +40,7 @@ a {
 
 .link {
     text-decoration: none;
-    color: #d9ead3;
+    color: #FFFACD;
 }
 
 /* card */
