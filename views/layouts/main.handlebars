@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tech Blog</title>
-    <link rel="stylesheet" href="../../public/css/style.css">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
-
 <body>
-    <nav id="navbar">
-        <h2 id="techHeader">Tech Blog</h2>
-        <ul>
+    <nav id='navbar'>
+        <ul id="navbar-ul">
             <li>
-                <p><a href="/" class="navLink">Homepage</a></p>
+                <p><a href="/" class="link">Home</a></p>
             </li>
-            {{#if loggedOut}}
+            {{#if loggedIn}}
             <li>
-                <p><a href="/dashboard" class="navLink">Dashboard</a></p>
+                <p><a href="/dashboard" class="link">Dashboard</a></p>
             </li>
-
             <li>
-                <p><a href="/login" class="navLink">User Login</a></p>
+                <p><button id="logout-btn" class="btn-no-style">Logout</button></p>
             </li>
-            {{#else}}
+            <script src="/js/logout.js"></script>
+            {{else}}
             <li>
-                <p><button id="logoutBtn">Logout</button></p>
+                <p><a href="/login" class="link">Login</a></p>
             </li>
-            {{#/if}}
+            
+            {{/if}}
         </ul>
 
-
+        <h1 id="nav-header">The Tech Blog</h1>
     </nav>
+
+    {{{ body }}}
+
 </body>
-<script src="../../public/js/tech.js"></script>
+
+
+<script src="/js/home.js"></script>
 
 </html>
