@@ -12,7 +12,7 @@ router.get("/", (req, res) => {
             model: User,
             as: "user",
             attributes: ["username"],
-        }, ],
+        },],
     }).then((dbCommentData) => {
         res.json(dbCommentData);
     }).catch((err) => {
@@ -30,11 +30,11 @@ router.get("/:id", (req, res) => {
             model: User,
             as: "user",
             attributes: ["username"],
-        }, ],
+        },],
     }).then((dbCommentData) => {
         if (!dbCommentData) {
             res.status(404).json({
-                message: "No user with this comment"
+                message: "Sorry this comment does not exist in our database."
             });
             return;
         }
@@ -71,7 +71,7 @@ router.delete("/:id", (req, res) => {
     }).then((dbCommentData) => {
         if (!dbCommentData) {
             res.status(404).json({
-                message: "No user with this comment"
+                message: "Sorry this comment does not exist in our database."
             });
             return;
         }
